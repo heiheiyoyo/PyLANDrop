@@ -49,8 +49,10 @@ class Settings:
     @staticmethod
     def discoverable() -> bool:
         value = QSettings().value("discoverable", True)
-        assert value in ["true", "false"]
-        return value == "true"
+        if isinstance(value, str):
+            return value == "true"
+        else:
+            return value
 
     @staticmethod
     def serverPort() -> int:
