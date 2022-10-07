@@ -1,0 +1,62 @@
+from PyQt5.QtCore import *
+from PyQt5.QtWidgets import *
+from PyQt5.QtGui import *
+from PyQt5.QtNetwork import *
+from settings import Settings
+
+
+^\s+\*
+#
+
+connect\(&?([^,]*), .*::(.*), this, .*::(.*)\);
+self.$1.$2.connect(self.$3)
+
+foreach \([^,]* &?\*?([^, ]+), ([^, ]+)\) \{
+for $1 in $2:
+
+->
+.
+
+::
+.
+
+(.+).insert\(([^, ]+), ([^, ]+)\);
+$1[$2]=QJsonValue($3)
+
+if \(!(.*)\) \{$
+if not $1:
+
+while \(!(.*)\) \{$
+while not $1:
+
+emit (\w+)
+self.$1.emit
+
+.arg\(
+.replace("%1", 
+
+;$
+
+^#/
+
+(Q_OBJECT)|(public:)|(private:)|(private slots:)|(protected:)
+
+(^\s+)([^ ]+) (\w+)\(([^()]*)\);
+$1def $3(self,$4):\n$1    pass
+
+
+
+throw std.runtime_error
+raise RuntimeError
+
+this
+self
+
+true
+True
+
+(?:const)? (Q\w+) \*?&?(\w+) = ([^,(]+)
+$2: $1 = $3
+
+\.value\((.+)\)
+[$1]
