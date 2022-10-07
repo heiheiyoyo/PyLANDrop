@@ -51,8 +51,6 @@ class SettingsDialog(QDialog):
             self.downloadPathSelectButtonClicked)
         self.ui.serverPortLineEdit.textChanged.connect(
             self.serverPortLineEditChanged)
-        self.ui.checkForUpdatesButton.clicked.connect(
-            self.checkForUpdatesButtonClicked)
 
         self.ui.buttonBox.button(QDialogButtonBox.Ok).setText(self.tr("OK"))
         self.ui.buttonBox.button(
@@ -78,53 +76,6 @@ class SettingsDialog(QDialog):
 
     def serverPortLineEditChanged(self) -> None:
         self.serverPortEdited = True
-
-    def checkForUpdatesButtonClicked(self) -> None:
-        manager: QNetworkAccessManager = QNetworkAccessManager(self)
-
-        def finished_callback(reply: QNetworkReply):
-            try:
-                if reply.error():
-                    raise RuntimeError(reply.errorString())
-
-                body = bytes(reply.readAll())
-                try:
-                    obj = json.loads(body)
-                except json.JSONDecodeError:
-                    raise RuntimeError(
-                        self.tr("Failed to get latest version."))
-
-                version = obj["desktop"]
-                if not isinstance(version, str):
-                    raise RuntimeError(
-                        self.tr("Failed to get latest version."))
-
-                curVersion, _ = QVersionNumber.fromString(
-                    QApplication.applicationVersion())
-                latestVersion, _ = QVersionNumber.fromString(
-                    version)
-                if latestVersion > curVersion:
-                    if QMessageBox.question(self, QApplication.applicationName(),
-                                            self.tr("There is a new version %1! Do you want to update?"
-                                                    ).replace("%1", version)) == QMessageBox.Yes:
-                        QDesktopServices.openUrl(QUrl(
-                            "https://landrop.app/#downloads"))
-
-                else:
-                    QMessageBox.information(self, QApplication.applicationName(),
-                                            self.tr("You have the latest version!"))
-            except Exception as e:
-                QMessageBox.critical(
-                    self, QApplication.applicationName(), str(e))
-            manager.deleteLater()
-            self.ui.checkForUpdatesButton.setEnabled(True)
-
-        manager.finished.connect(finished_callback)
-
-        request = QNetworkRequest(
-            QUrl("https://releases.landrop.app/versions.json"))
-        self.ui.checkForUpdatesButton.setEnabled(False)
-        manager.get(request)
 
     def showEvent(self, e: QShowEvent) -> None:
         super().showEvent(e)
