@@ -31,7 +31,7 @@
 from typing import Optional
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QDialog, QWidget, QApplication
-from ui_aboutdialog import Ui_AboutDialog
+from LANDrop.ui_aboutdialog import Ui_AboutDialog
 
 
 class AboutDialog(QDialog):
@@ -50,14 +50,5 @@ class AboutDialog(QDialog):
                 "%3", QApplication.organizationName()))
         self.ui.aboutQtButton.clicked.connect(self.aboutQtButtonClicked)
 
-    def aboutQtButtonClicked(self)->None:
+    def aboutQtButtonClicked(self) -> None:
         QApplication.aboutQt()
-
-
-if __name__ == "__main__":
-    import sys
-
-    app = QApplication(sys.argv)
-    w = AboutDialog()
-    w.show()
-    sys.exit(app.exec_())

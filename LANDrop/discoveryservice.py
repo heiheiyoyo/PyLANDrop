@@ -34,7 +34,7 @@ from typing import List, Optional
 from PyQt5.QtCore import QObject, pyqtSignal, QSysInfo
 from PyQt5.QtWidgets import QMessageBox, QApplication
 from PyQt5.QtNetwork import QHostAddress, QUdpSocket, QNetworkInterface
-from settings import Settings
+from LANDrop.settings import Settings
 
 DISCOVERY_PORT = 52637
 

@@ -31,8 +31,8 @@
 from PyQt5.QtCore import QTranslator, QLocale
 from PyQt5.QtWidgets import QApplication, QSystemTrayIcon, QMessageBox
 import sys
-import resources
-from trayicon import TrayIcon
+from LANDrop.trayicon import TrayIcon
+import LANDrop.resources
 
 
 def main():

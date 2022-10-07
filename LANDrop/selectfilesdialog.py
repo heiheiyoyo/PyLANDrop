@@ -28,12 +28,12 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-from PyQt5.QtCore import QFile, QIODevice, QStringListModel, QFileInfo,Qt
+from PyQt5.QtCore import QFile, QIODevice, QStringListModel, QFileInfo, Qt
 from PyQt5.QtWidgets import QDialog, QWidget, QDialogButtonBox, QMessageBox, QApplication, QFileDialog
 from PyQt5.QtGui import QDropEvent, QDragEnterEvent
-from ui_selectfilesdialog import Ui_SelectFilesDialog
-from discoveryservice import DiscoveryService
-from sendtodialog import SendToDialog
+from LANDrop.ui_selectfilesdialog import Ui_SelectFilesDialog
+from LANDrop.discoveryservice import DiscoveryService
+from LANDrop.sendtodialog import SendToDialog
 from typing import List
 
 
@@ -45,7 +45,7 @@ class SelectFilesDialog(QDialog):
         self.discoveryService = discoveryService
         self.files: List[QFile] = []
         self.filesStringListModel = QStringListModel()
-        self._d=None
+        self._d = None
 
         self.ui.setupUi(self)
         self.setWindowFlag(Qt.WindowStaysOnTopHint)
@@ -130,13 +130,3 @@ class SelectFilesDialog(QDialog):
 
             self.updateFileStringListModel()
             event.acceptProposedAction()
-
-
-if __name__ == "__main__":
-    import sys
-    from discoveryservice import DiscoveryService
-
-    app = QApplication(sys.argv)
-    w = SelectFilesDialog(None, DiscoveryService())
-    w.show()
-    sys.exit(app.exec_())

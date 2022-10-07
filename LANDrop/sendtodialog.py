@@ -42,11 +42,11 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtNetwork import *
 from typing import List
-from ui_sendtodialog import Ui_SendToDialog
+from LANDrop.ui_sendtodialog import Ui_SendToDialog
 from dataclasses import dataclass
-from discoveryservice import DiscoveryService
-from filetransfersender import FileTransferSender
-from filetransferdialog import FileTransferDialog
+from LANDrop.discoveryservice import DiscoveryService
+from LANDrop.filetransfersender import FileTransferSender
+from LANDrop.filetransferdialog import FileTransferDialog
 
 
 class SendToDialog(QDialog):

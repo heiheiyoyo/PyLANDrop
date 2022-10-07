@@ -32,9 +32,9 @@
 from PyQt5.QtCore import QObject,Qt
 from PyQt5.QtNetwork import QTcpServer, QHostAddress
 from typing import Optional
-from settings import Settings
-from filetransferreceiver import FileTransferReceiver
-from filetransferdialog import FileTransferDialog
+from LANDrop.settings import Settings
+from LANDrop.filetransferreceiver import FileTransferReceiver
+from LANDrop.filetransferdialog import FileTransferDialog
 
 
 class FileTransferServer(QObject):

@@ -34,8 +34,8 @@ from typing import Optional
 from PyQt5.QtCore import QDir, QFileInfo, QFile, QIODevice, QObject, QUrl, QTimer
 from PyQt5.QtGui import QDesktopServices
 from PyQt5.QtNetwork import QTcpSocket
-from filetransfersession import FileTransferSession, State
-from settings import Settings
+from LANDrop.filetransfersession import FileTransferSession, State
+from LANDrop.settings import Settings
 
 
 class FileTransferReceiver(FileTransferSession):

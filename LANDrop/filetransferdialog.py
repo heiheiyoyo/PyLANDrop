@@ -31,8 +31,8 @@
 from typing import List, Optional
 from PyQt5.QtCore import Qt, QLocale
 from PyQt5.QtWidgets import QWidget, QDialog, QMessageBox, QApplication
-from ui_filetransferdialog import Ui_FileTransferDialog
-from filetransfersession import FileTransferSession
+from LANDrop.ui_filetransferdialog import Ui_FileTransferDialog
+from LANDrop.filetransfersession import FileTransferSession
 
 
 class FileTransferDialog(QDialog):

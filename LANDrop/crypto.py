@@ -30,7 +30,7 @@
 from typing import Union
 
 from PyQt5.QtCore import QObject, QByteArray
-from sodium import *
+from LANDrop.sodium import *
 
 
 class Crypto:

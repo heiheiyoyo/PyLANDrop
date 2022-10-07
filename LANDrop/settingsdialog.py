@@ -33,8 +33,8 @@ from PyQt5.QtCore import QVersionNumber, QUrl, Qt
 from PyQt5.QtWidgets import QDialog, QDialogButtonBox, QMessageBox, QApplication, QFileDialog, QWidget
 from PyQt5.QtGui import QDesktopServices, QShowEvent
 from PyQt5.QtNetwork import QNetworkAccessManager, QNetworkReply, QNetworkRequest
-from settings import Settings
-from ui_settingsdialog import Ui_SettingsDialog
+from LANDrop.settings import Settings
+from LANDrop.ui_settingsdialog import Ui_SettingsDialog
 from typing import Optional
 
 

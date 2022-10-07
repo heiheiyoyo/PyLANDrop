@@ -33,8 +33,8 @@ from typing import Optional, List
 from PyQt5.QtCore import QSysInfo, QFileInfo, QTimer, QObject, QFile
 from PyQt5.QtNetwork import QTcpSocket
 
-from filetransfersession import FileTransferSession, State
-from settings import Settings
+from LANDrop.filetransfersession import FileTransferSession, State
+from LANDrop.settings import Settings
 
 TRANSFER_QUANTA = 64000
 

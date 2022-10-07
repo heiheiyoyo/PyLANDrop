@@ -36,7 +36,7 @@ from PyQt5.QtCore import QObject, pyqtSignal
 from PyQt5.QtNetwork import QTcpSocket, QAbstractSocket
 from typing import Optional
 
-from crypto import Crypto
+from LANDrop.crypto import Crypto
 
 
 class State(Enum):

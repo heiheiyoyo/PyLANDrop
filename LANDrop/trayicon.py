@@ -33,12 +33,12 @@ from PyQt5.QtCore import QObject, QSysInfo, QTimer, QDir, QUrl, Qt
 from PyQt5.QtWidgets import QApplication, QSystemTrayIcon, QMenu
 from PyQt5.QtGui import QIcon, QDesktopServices
 from PyQt5.QtNetwork import QNetworkProxy
-from settings import Settings
-from aboutdialog import AboutDialog
-from settingsdialog import SettingsDialog
-from filetransferserver import FileTransferServer
-from discoveryservice import DiscoveryService
-from selectfilesdialog import SelectFilesDialog
+from LANDrop.settings import Settings
+from LANDrop.aboutdialog import AboutDialog
+from LANDrop.settingsdialog import SettingsDialog
+from LANDrop.filetransferserver import FileTransferServer
+from LANDrop.discoveryservice import DiscoveryService
+from LANDrop.selectfilesdialog import SelectFilesDialog
 
 
 class TrayIcon(QSystemTrayIcon):
@@ -113,15 +113,3 @@ class TrayIcon(QSystemTrayIcon):
     def trayIconActivated(self, reason: QSystemTrayIcon.ActivationReason) -> None:
         if reason == QSystemTrayIcon.ActivationReason.DoubleClick:
             self.sendActionTriggered()
-
-
-if __name__ == "__main__":
-    import sys
-    import resources
-
-    app = QApplication(sys.argv)
-    QApplication.setQuitOnLastWindowClosed(False)
-    icon = TrayIcon()
-    icon.show()
-
-    sys.exit(app.exec())
