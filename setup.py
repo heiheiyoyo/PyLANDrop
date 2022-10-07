@@ -15,5 +15,6 @@ setuptools.setup(
     install_requires=REQUIRED_PACKAGES,
     packages=['LANDrop'],
     license="BSD-3",
+    python_requires='>=3.6',
     entry_points={'console_scripts': ['landrop = LANDrop.__main__:main']}
 )
