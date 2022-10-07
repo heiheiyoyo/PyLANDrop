@@ -24,6 +24,7 @@ To run LANDrop:
 1. Download and install the dependencies: 
     ```
     pip install -r requirements.txt
+    pip install pyinstaller
     ```
 2. Clone this repository
     ```
@@ -31,9 +32,22 @@ To run LANDrop:
     ```
 3. Run the following commands
     ```
-    cd LANDrop
+    cd PyLANDrop
+    pyinstaller -F LANDrop/main.py -n LANDrop --hidden-import _cffi_backend
     ```
 4. You can now run LANDrop via
     ```
-    python main.py
+    cd dist
+    ./LANDrop
+    ```
+
+Or you can install the package to your site-packages
+
+    ```
+    python setup.py install
+    ```
+
+then you can run it by command
+    ```
+    landrop
     ```
