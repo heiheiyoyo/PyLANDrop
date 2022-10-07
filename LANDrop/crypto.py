@@ -29,7 +29,7 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 from typing import Union
 
-from PyQt5.QtCore import QObject, QByteArray
+from PySide2.QtCore import QObject, QByteArray
 from LANDrop.sodium import *
 
 

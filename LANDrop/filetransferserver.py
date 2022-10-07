@@ -29,8 +29,8 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-from PyQt5.QtCore import QObject,Qt
-from PyQt5.QtNetwork import QTcpServer, QHostAddress
+from PySide2.QtCore import QObject,Qt
+from PySide2.QtNetwork import QTcpServer, QHostAddress
 from typing import Optional
 from LANDrop.settings import Settings
 from LANDrop.filetransferreceiver import FileTransferReceiver

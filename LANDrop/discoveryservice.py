@@ -31,16 +31,16 @@
 
 import json
 from typing import List, Optional
-from PyQt5.QtCore import QObject, pyqtSignal, QSysInfo
-from PyQt5.QtWidgets import QMessageBox, QApplication
-from PyQt5.QtNetwork import QHostAddress, QUdpSocket, QNetworkInterface
+from PySide2.QtCore import QObject, Signal, QSysInfo
+from PySide2.QtWidgets import QMessageBox, QApplication
+from PySide2.QtNetwork import QHostAddress, QUdpSocket, QNetworkInterface
 from LANDrop.settings import Settings
 
 DISCOVERY_PORT = 52637
 
 
 class DiscoveryService(QObject):
-    newHost = pyqtSignal(str, QHostAddress, int)  # deviceName,addr,port
+    newHost = Signal(str, QHostAddress, int)  # deviceName,addr,port
 
     def __init__(self, parent: Optional['QObject'] = None) -> None:
         super().__init__(parent)
@@ -50,7 +50,7 @@ class DiscoveryService(QObject):
 
     def start(self, serverPort: int) -> None:
         self.serverPort = serverPort
-        if not self.socket.bind(QHostAddress.Any, DISCOVERY_PORT):
+        if not self.socket.bind(QHostAddress(QHostAddress.Any), DISCOVERY_PORT):
             QMessageBox.warning(None, QApplication.applicationName(),
                                 self.tr(
                                     "Unable to bind to port %1.\nYour device won't be discoverable."
@@ -94,6 +94,7 @@ class DiscoveryService(QObject):
         while self.socket.hasPendingDatagrams():
             size = self.socket.pendingDatagramSize()
             data, addr, port = self.socket.readDatagram(size)
+            data = bytes(data)
 
             if self.isLocalAddress(addr):
                 continue

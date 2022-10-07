@@ -29,10 +29,10 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 from typing import Optional
 
-from PyQt5.QtCore import QObject, QSysInfo, QTimer, QDir, QUrl, Qt
-from PyQt5.QtWidgets import QApplication, QSystemTrayIcon, QMenu
-from PyQt5.QtGui import QIcon, QDesktopServices
-from PyQt5.QtNetwork import QNetworkProxy
+from PySide2.QtCore import QObject, QSysInfo, QTimer, QDir, QUrl, Qt
+from PySide2.QtWidgets import QApplication, QSystemTrayIcon, QMenu
+from PySide2.QtGui import QIcon, QDesktopServices
+from PySide2.QtNetwork import QNetworkProxy
 from LANDrop.settings import Settings
 from LANDrop.aboutdialog import AboutDialog
 from LANDrop.settingsdialog import SettingsDialog

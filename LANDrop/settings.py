@@ -29,9 +29,9 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-from PyQt5.QtCore import QSettings, QStandardPaths, QDir
-from PyQt5.QtWidgets import QApplication
-from PyQt5.QtNetwork import QHostInfo
+from PySide2.QtCore import QSettings, QStandardPaths, QDir
+from PySide2.QtWidgets import QApplication
+from PySide2.QtNetwork import QHostInfo
 
 
 class Settings:

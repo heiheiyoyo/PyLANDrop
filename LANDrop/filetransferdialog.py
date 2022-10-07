@@ -29,8 +29,8 @@
 # OF self SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 from typing import List, Optional
-from PyQt5.QtCore import Qt, QLocale
-from PyQt5.QtWidgets import QWidget, QDialog, QMessageBox, QApplication
+from PySide2.QtCore import Qt, QLocale
+from PySide2.QtWidgets import QWidget, QDialog, QMessageBox, QApplication
 from LANDrop.ui_filetransferdialog import Ui_FileTransferDialog
 from LANDrop.filetransfersession import FileTransferSession
 

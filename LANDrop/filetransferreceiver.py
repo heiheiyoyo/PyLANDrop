@@ -31,9 +31,9 @@
 from base64 import encode
 import json
 from typing import Optional
-from PyQt5.QtCore import QDir, QFileInfo, QFile, QIODevice, QObject, QUrl, QTimer
-from PyQt5.QtGui import QDesktopServices
-from PyQt5.QtNetwork import QTcpSocket
+from PySide2.QtCore import QDir, QFileInfo, QFile, QIODevice, QObject, QUrl, QTimer
+from PySide2.QtGui import QDesktopServices
+from PySide2.QtNetwork import QTcpSocket
 from LANDrop.filetransfersession import FileTransferSession, State
 from LANDrop.settings import Settings
 

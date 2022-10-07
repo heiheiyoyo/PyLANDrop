@@ -28,8 +28,8 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-from PyQt5.QtCore import QTranslator, QLocale
-from PyQt5.QtWidgets import QApplication, QSystemTrayIcon, QMessageBox
+from PySide2.QtCore import QTranslator, QLocale
+from PySide2.QtWidgets import QApplication, QSystemTrayIcon, QMessageBox
 import sys
 from LANDrop.trayicon import TrayIcon
 import LANDrop.resources
@@ -58,7 +58,7 @@ def main():
         t = TrayIcon()
         t.show()
 
-        sys.exit(a.exec())
+        sys.exit(a.exec_())
 
     except Exception as e:
         QMessageBox.critical(None, QApplication.applicationName(), str(e))

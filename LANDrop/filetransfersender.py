@@ -30,8 +30,8 @@
 import json
 from typing import Optional, List
 
-from PyQt5.QtCore import QSysInfo, QFileInfo, QTimer, QObject, QFile
-from PyQt5.QtNetwork import QTcpSocket
+from PySide2.QtCore import QSysInfo, QFileInfo, QTimer, QObject, QFile
+from PySide2.QtNetwork import QTcpSocket
 
 from LANDrop.filetransfersession import FileTransferSession, State
 from LANDrop.settings import Settings

@@ -29,8 +29,8 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 from typing import Optional
-from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QDialog, QWidget, QApplication
+from PySide2.QtCore import Qt
+from PySide2.QtWidgets import QDialog, QWidget, QApplication
 from LANDrop.ui_aboutdialog import Ui_AboutDialog
 
 

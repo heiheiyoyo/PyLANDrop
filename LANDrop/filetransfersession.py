@@ -32,8 +32,8 @@ from abc import abstractmethod
 from dataclasses import dataclass
 from enum import Enum, auto
 from typing import List
-from PyQt5.QtCore import QObject, pyqtSignal
-from PyQt5.QtNetwork import QTcpSocket, QAbstractSocket
+from PySide2.QtCore import QObject, Signal
+from PySide2.QtNetwork import QTcpSocket, QAbstractSocket
 from typing import Optional
 
 from LANDrop.crypto import Crypto
@@ -47,11 +47,11 @@ class State(Enum):
 
 
 class FileTransferSession(QObject):
-    printMessage = pyqtSignal(str)
-    updateProgress = pyqtSignal(float)
-    errorOccurred = pyqtSignal(str)
-    fileMetadataReady = pyqtSignal(list, int, str, str)
-    ended = pyqtSignal()
+    printMessage = Signal(str)
+    updateProgress = Signal(float)
+    errorOccurred = Signal(str)
+    fileMetadataReady = Signal(list, int, str, str)
+    ended = Signal()
 
     @dataclass
     class FileMetadata:

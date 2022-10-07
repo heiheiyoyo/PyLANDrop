@@ -29,10 +29,10 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import json
-from PyQt5.QtCore import QVersionNumber, QUrl, Qt
-from PyQt5.QtWidgets import QDialog, QDialogButtonBox, QMessageBox, QApplication, QFileDialog, QWidget
-from PyQt5.QtGui import QDesktopServices, QShowEvent
-from PyQt5.QtNetwork import QNetworkAccessManager, QNetworkReply, QNetworkRequest
+from PySide2.QtCore import QVersionNumber, QUrl, Qt
+from PySide2.QtWidgets import QDialog, QDialogButtonBox, QMessageBox, QApplication, QFileDialog, QWidget
+from PySide2.QtGui import QDesktopServices, QShowEvent
+from PySide2.QtNetwork import QNetworkAccessManager, QNetworkReply, QNetworkRequest
 from LANDrop.settings import Settings
 from LANDrop.ui_settingsdialog import Ui_SettingsDialog
 from typing import Optional
