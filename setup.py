@@ -7,6 +7,7 @@ setuptools.setup(
     name='LANDrop',
     version='0.4.0a1',
     description='LANDrop is a cross-platform tool that you can use to conveniently transfer photos, videos, and other types of files to other devices on the same local network.',
+    long_description=open("README.md", encoding='utf-8').read(),
     author='heiheiyoyo',
     author_email='543425864@qq.com',
     url='https://github.com/heiheiyoyo/PyLANDrop',
