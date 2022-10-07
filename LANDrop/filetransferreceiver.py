@@ -50,7 +50,7 @@ class FileTransferReceiver(FileTransferSession):
             "response": int(accepted)
         }
         self.encryptAndSend(json.dumps(
-            obj, ensure_ascii=False), encode("utf-8"))
+            obj, ensure_ascii=False).encode("utf-8"))
 
         if accepted:
             if not QDir().mkpath(self.downloadPath):
@@ -110,9 +110,9 @@ class FileTransferReceiver(FileTransferSession):
                 sizeInt = int(size)
                 self.totalSize += sizeInt
                 self.transferQ.append(FileTransferSession.FileMetadata(
-                    filename.toString(), sizeInt))
+                    filename, sizeInt))
 
-            self.fileMetadataReady.emit(self.transferQ, self.totalSize, deviceName.toString(),
+            self.fileMetadataReady.emit(self.transferQ, self.totalSize, deviceName,
                                         self.crypto.sessionKeyDigest())
         elif self.state == State.TRANSFERRING:
             self.transferredSize += len(data)
