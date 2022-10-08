@@ -57,7 +57,7 @@ jobs:
           PyLANDrop ${{ github.ref_name }}
           
           You can get it from [PyPI](https://pypi.org/project/LANDrop/)
-        if: startsWith(github.ref_name, 'v') && github.ref_type == 'tag'
+      if: startsWith(github.ref_name, 'v') && github.ref_type == 'tag'
 
 
   build-linux:
@@ -106,7 +106,7 @@ jobs:
           PyLANDrop ${{ github.ref_name }}
           
           You can get it from [PyPI](https://pypi.org/project/LANDrop/)
-        if: startsWith(github.ref_name, 'v') && github.ref_type == 'tag'
+      if: startsWith(github.ref_name, 'v') && github.ref_type == 'tag'
   build-macos:
     runs-on: macos-latest
     outputs:
@@ -154,5 +154,5 @@ jobs:
           PyLANDrop ${{ github.ref_name }}
           
           You can get it from [PyPI](https://pypi.org/project/LANDrop/)
-        if: startsWith(github.ref_name, 'v') && github.ref_type == 'tag'
+      if: startsWith(github.ref_name, 'v') && github.ref_type == 'tag'
   
