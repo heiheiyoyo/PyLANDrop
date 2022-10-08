@@ -28,7 +28,6 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-from base64 import encode
 import json
 from typing import Optional
 from PyQt5.QtCore import QDir, QFileInfo, QFile, QIODevice, QObject, QUrl, QTimer

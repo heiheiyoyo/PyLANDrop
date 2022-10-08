@@ -27,9 +27,8 @@
 # CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-from typing import Union
 
-from PyQt5.QtCore import QObject, QByteArray
+from PyQt5.QtCore import QObject
 from LANDrop.sodium import *
 
 
@@ -64,14 +63,15 @@ class Crypto:
     def localPublicKey(self) -> bytes:
         return self.publicKey
 
-    def setRemotePublicKey(self, remotePublicKey: Union[QByteArray, bytes]) -> None:
-        remotePublicKey = bytes(remotePublicKey)
+    def setRemotePublicKey(self, remotePublicKey: bytes) -> None:
+        if not isinstance(remotePublicKey, bytes):
+            remotePublicKey = bytes(remotePublicKey)
         try:
             self.sessionKey = crypto_scalarmult(
                 self.secretKey, remotePublicKey)
         except RuntimeError:
             raise RuntimeError(QObject().tr(
-                "Unable to calculate session key."))
+                b"Unable to calculate session key."))
 
     def sessionKeyDigest(self) -> str:
         h = crypto_generichash(self.sessionKey, crypto_generichash_BYTES_MIN)
@@ -80,17 +80,19 @@ class Crypto:
             hash_ |= h[i] << (i * 8)
         return f"{hash_ % 1000000:0>6}"
 
-    def encrypt(self, data: Union[QByteArray, bytes]) -> bytes:
-        data = bytes(data)
+    def encrypt(self, data: bytes) -> bytes:
+        if not isinstance(data, bytes):
+            data = bytes(data)
         nonce = randombytes(crypto_aead_chacha20poly1305_ietf_NPUBBYTES)
         cipherText = crypto_aead_chacha20poly1305_ietf_encrypt(
             data, None, nonce, self.sessionKey)
         return nonce + cipherText
 
-    def decrypt(self, data: Union[QByteArray, bytes]) -> bytes:
-        data = bytes(data)
+    def decrypt(self, data: bytes) -> bytes:
+        if not isinstance(data, bytes):
+            data = bytes(data)
         if len(data) < crypto_aead_chacha20poly1305_ietf_NPUBBYTES:
-            raise RuntimeError(QObject().tr("Cipher text too short."))
+            raise RuntimeError(QObject().tr(b"Cipher text too short."))
         nonce = data[:crypto_aead_chacha20poly1305_ietf_NPUBBYTES]
         cipherText = data[crypto_aead_chacha20poly1305_ietf_NPUBBYTES:]
         try:
@@ -98,5 +100,5 @@ class Crypto:
                 cipherText, None, nonce, self.sessionKey)
         except (TypeError, ValueError) as e:
             raise RuntimeError(QObject().tr(
-                "Decryption failed.") + " Error: " + str(e))
+                b"Decryption failed.") + " Error: " + str(e))
         return plainText
