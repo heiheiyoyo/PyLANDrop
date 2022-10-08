@@ -37,10 +37,10 @@
 # include "sendtodialog.h"
 # include "ui_sendtodialog.h"
 
-from PySide2.QtCore import *
-from PySide2.QtWidgets import *
-from PySide2.QtGui import *
-from PySide2.QtNetwork import *
+from PySide2.QtCore import Qt, QFile, QStringListModel, QTimer, QModelIndex
+from PySide2.QtWidgets import QWidget, QDialog, QDialogButtonBox, QApplication, QMessageBox
+from PySide2.QtGui import QCursor
+from PySide2.QtNetwork import QHostAddress, QTcpSocket
 from typing import List
 from LANDrop.ui_sendtodialog import Ui_SendToDialog
 from dataclasses import dataclass
