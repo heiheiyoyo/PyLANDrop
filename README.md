@@ -1,10 +1,17 @@
-<img src="LANDrop/icons/banner.png" width="300">
+<img src="https://github.com/heiheiyoyo/PyLANDrop/raw/master/LANDrop/icons/banner.png" width="300">
 
 > Drop any files to any devices on your LAN. No need to use instant messaging for that anymore.
 
 LANDrop is a cross-platform tool that you can use to conveniently transfer photos, videos, and other types of files to other devices on the same local network.
 
 You can download prebuilts of LANDrop from the [official website](https://landrop.app/#downloads).
+
+Or you can download it from PyPI by command:
+```
+pip install LANDrop
+```
+You can run it by command `landrop`
+
 
 ## Features
 
@@ -40,14 +47,8 @@ To run LANDrop:
     cd dist
     ./LANDrop
     ```
-
 Or you can install the package to your site-packages
-
-    ```
-    python setup.py install
-    ```
-
-then you can run it by command
-    ```
-    landrop
-    ```
+```
+python setup.py install
+```
+then you can run it by command `landrop`
