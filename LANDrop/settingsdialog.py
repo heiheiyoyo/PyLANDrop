@@ -28,11 +28,9 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import json
-from PyQt5.QtCore import QVersionNumber, QUrl, Qt
+from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QDialog, QDialogButtonBox, QMessageBox, QApplication, QFileDialog, QWidget
-from PyQt5.QtGui import QDesktopServices, QShowEvent
-from PyQt5.QtNetwork import QNetworkAccessManager, QNetworkReply, QNetworkRequest
+from PyQt5.QtGui import QShowEvent
 from LANDrop.settings import Settings
 from LANDrop.ui_settingsdialog import Ui_SettingsDialog
 from typing import Optional
@@ -72,7 +70,7 @@ class SettingsDialog(QDialog):
         dir_: str = QFileDialog.getExistingDirectory(self, self.tr("Select Download Path"),
                                                      self.ui.downloadPathLineEdit.text())
         if dir_:
-            self.ui.downloadPathLineEdit.setText(dir)
+            self.ui.downloadPathLineEdit.setText(dir_)
 
     def serverPortLineEditChanged(self) -> None:
         self.serverPortEdited = True
