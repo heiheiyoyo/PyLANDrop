@@ -28,9 +28,9 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-from PyQt5.QtCore import QFile, QIODevice, QStringListModel, QFileInfo, Qt
-from PyQt5.QtWidgets import QDialog, QWidget, QDialogButtonBox, QMessageBox, QApplication, QFileDialog
-from PyQt5.QtGui import QDropEvent, QDragEnterEvent
+from PyQt6.QtCore import QFile, QIODevice, QStringListModel, QFileInfo, Qt
+from PyQt6.QtWidgets import QDialog, QWidget, QDialogButtonBox, QMessageBox, QApplication, QFileDialog
+from PyQt6.QtGui import QDropEvent, QDragEnterEvent
 from LANDrop.ui_selectfilesdialog import Ui_SelectFilesDialog
 from LANDrop.discoveryservice import DiscoveryService
 from LANDrop.sendtodialog import SendToDialog
@@ -48,14 +48,14 @@ class SelectFilesDialog(QDialog):
         self._d = None
 
         self.ui.setupUi(self)
-        self.setWindowFlag(Qt.WindowStaysOnTopHint)
+        self.setWindowFlag(Qt.WindowType.WindowStaysOnTopHint)
         self.ui.addButton.clicked.connect(self.addButtonClicked)
         self.ui.removeButton.clicked.connect(self.removeButtonClicked)
         self.ui.filesListView.setModel(self.filesStringListModel)
 
-        self.ui.buttonBox.button(QDialogButtonBox.Ok).setText(self.tr("Send"))
+        self.ui.buttonBox.button(QDialogButtonBox.StandardButton.Ok).setText(self.tr("Send"))
         self.ui.buttonBox.button(
-            QDialogButtonBox.Cancel).setText(self.tr("Cancel"))
+            QDialogButtonBox.StandardButton.Cancel).setText(self.tr("Cancel"))
 
     def addFile(self, filename: str) -> None:
         for file in self.files:
@@ -63,7 +63,7 @@ class SelectFilesDialog(QDialog):
                 return
 
         fp = QFile(filename)
-        if not fp.open(QIODevice.ReadOnly):
+        if not fp.open(QIODevice.OpenModeFlag.ReadOnly):
             QMessageBox.critical(self, QApplication.applicationName(),
                                  self.tr("Unable to open file %1. Skipping.")
                                  .replace("%1", filename))
@@ -114,10 +114,10 @@ class SelectFilesDialog(QDialog):
             return
 
         self._d = SendToDialog(None, self.files, self.discoveryService)
-        self._d.setAttribute(Qt.WA_DeleteOnClose)
+        self._d.setAttribute(Qt.WidgetAttribute.WA_DeleteOnClose)
         self._d.show()
 
-        self.done(self.Accepted)
+        self.done(self.DialogCode.Accepted)
 
     def dragEnterEvent(self, event: QDragEnterEvent) -> None:
         if event.mimeData().hasUrls():

@@ -30,9 +30,9 @@
 
 import json
 from typing import Optional
-from PyQt5.QtCore import QDir, QFileInfo, QFile, QIODevice, QObject, QUrl, QTimer
-from PyQt5.QtGui import QDesktopServices
-from PyQt5.QtNetwork import QTcpSocket
+from PyQt6.QtCore import QDir, QFileInfo, QFile, QIODevice, QObject, QUrl, QTimer
+from PyQt6.QtGui import QDesktopServices
+from PyQt6.QtNetwork import QTcpSocket
 from LANDrop.filetransfersession import FileTransferSession, State
 from LANDrop.settings import Settings
 
@@ -41,7 +41,7 @@ class FileTransferReceiver(FileTransferSession):
 
     def __init__(self, parent: Optional['QObject'], socket: QTcpSocket) -> None:
         super().__init__(parent, socket)
-        self.writingFile = None
+        self.writingFile :Optional[QFile] = None
         self.downloadPath = Settings.downloadPath()
 
     def respond(self, accepted: bool) -> None:
@@ -136,7 +136,7 @@ class FileTransferReceiver(FileTransferSession):
                 self.writingFile.deleteLater()
                 self.writingFile = None
             self.writingFile = QFile(filename, self)
-            if not self.writingFile.open(QIODevice.WriteOnly):
+            if not self.writingFile.open(QIODevice.OpenModeFlag.WriteOnly):
                 self.errorOccurred.emit(
                     self.tr("Unable to open file %1.").replace("%1", filename))
                 return

@@ -29,9 +29,9 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-from PyQt5.QtCore import QSettings, QStandardPaths, QDir
-from PyQt5.QtWidgets import QApplication
-from PyQt5.QtNetwork import QHostInfo
+from PyQt6.QtCore import QSettings, QStandardPaths, QDir
+from PyQt6.QtWidgets import QApplication
+from PyQt6.QtNetwork import QHostInfo
 
 
 class Settings:
@@ -42,7 +42,7 @@ class Settings:
 
     @staticmethod
     def downloadPath() -> str:
-        d = QStandardPaths.writableLocation(QStandardPaths.DownloadLocation)
+        d = QStandardPaths.writableLocation(QStandardPaths.StandardLocation.DownloadLocation)
         d += QDir.separator() + QApplication.applicationName()
         return QSettings().value("downloadPath", d)
 

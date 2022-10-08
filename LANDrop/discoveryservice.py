@@ -31,9 +31,9 @@
 
 import json
 from typing import List, Optional
-from PyQt5.QtCore import QObject, pyqtSignal, QSysInfo
-from PyQt5.QtWidgets import QMessageBox, QApplication
-from PyQt5.QtNetwork import QHostAddress, QUdpSocket, QNetworkInterface
+from PyQt6.QtCore import QObject, pyqtSignal, QSysInfo
+from PyQt6.QtWidgets import QMessageBox, QApplication
+from PyQt6.QtNetwork import QHostAddress, QUdpSocket, QNetworkInterface
 from LANDrop.settings import Settings
 
 DISCOVERY_PORT = 52637
@@ -50,7 +50,7 @@ class DiscoveryService(QObject):
 
     def start(self, serverPort: int) -> None:
         self.serverPort = serverPort
-        if not self.socket.bind(QHostAddress.Any, DISCOVERY_PORT):
+        if not self.socket.bind(QHostAddress.SpecialAddress.Any, DISCOVERY_PORT):
             QMessageBox.warning(None, QApplication.applicationName(),
                                 self.tr(
                                     "Unable to bind to port %1.\nYour device won't be discoverable."
@@ -82,9 +82,9 @@ class DiscoveryService(QObject):
         return False
 
     def broadcastAddresses(self) -> List[QHostAddress]:
-        ret = [QHostAddress.Broadcast]
+        ret = [QHostAddress.SpecialAddress.Broadcast]
         for i in QNetworkInterface.allInterfaces():
-            if i.flags() & QNetworkInterface.CanBroadcast:
+            if i.flags() & QNetworkInterface.InterfaceFlag.CanBroadcast:
                 for e in i.addressEntries():
                     ret.append(e.broadcast())
 

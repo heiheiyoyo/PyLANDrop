@@ -29,10 +29,10 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 from typing import Optional
 
-from PyQt5.QtCore import QObject, QSysInfo, QTimer, QDir, QUrl, Qt
-from PyQt5.QtWidgets import QApplication, QSystemTrayIcon, QMenu
-from PyQt5.QtGui import QIcon, QDesktopServices
-from PyQt5.QtNetwork import QNetworkProxy
+from PyQt6.QtCore import QObject, QSysInfo, QTimer, QDir, QUrl, Qt
+from PyQt6.QtWidgets import QApplication, QSystemTrayIcon, QMenu
+from PyQt6.QtGui import QIcon, QDesktopServices
+from PyQt6.QtNetwork import QNetworkProxy
 from LANDrop.settings import Settings
 from LANDrop.aboutdialog import AboutDialog
 from LANDrop.settingsdialog import SettingsDialog
@@ -51,7 +51,7 @@ class TrayIcon(QSystemTrayIcon):
         self._discoveryService = DiscoveryService()
         self._d = None
 
-        QNetworkProxy.setApplicationProxy(QNetworkProxy(QNetworkProxy.NoProxy))
+        QNetworkProxy.setApplicationProxy(QNetworkProxy(QNetworkProxy.ProxyType.NoProxy))
 
         appIcon = QIcon(":/icons/app.png")
         appMaskIcon = QIcon(":/icons/app_mask.png")
@@ -99,7 +99,7 @@ class TrayIcon(QSystemTrayIcon):
 
     def sendActionTriggered(self) -> None:
         self._d = SelectFilesDialog(None, self._discoveryService)
-        self._d.setAttribute(Qt.WA_DeleteOnClose)
+        self._d.setAttribute(Qt.WidgetAttribute.WA_DeleteOnClose)
         self._d.show()
 
     def openDownloadFolderActionTriggered(self) -> None:

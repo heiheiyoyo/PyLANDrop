@@ -32,8 +32,8 @@ from abc import abstractmethod
 from dataclasses import dataclass
 from enum import Enum, auto
 from typing import List
-from PyQt5.QtCore import QObject, pyqtSignal
-from PyQt5.QtNetwork import QTcpSocket, QAbstractSocket
+from PyQt6.QtCore import QObject, pyqtSignal
+from PyQt6.QtNetwork import QTcpSocket, QAbstractSocket
 from typing import Optional
 
 from LANDrop.crypto import Crypto
@@ -69,9 +69,9 @@ class FileTransferSession(QObject):
         self.transferQ: List[FileTransferSession.FileMetadata] = []
 
         self.socket.setParent(self)
-        self.socket.setSocketOption(QAbstractSocket.LowDelayOption, 1)
+        self.socket.setSocketOption(QAbstractSocket.SocketOption.LowDelayOption, 1)
         self.socket.readyRead.connect(self.socketReadyRead)
-        self.socket.error.connect(self.socketErrorOccurred)
+        self.socket.errorOccurred.connect(self.socketErrorOccurred)
 
     def start(self):
         self.printMessage.emit(self.tr("Handshaking..."))

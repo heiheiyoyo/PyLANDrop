@@ -28,7 +28,7 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-from PyQt5.QtCore import QObject
+from PyQt6.QtCore import QObject
 from LANDrop.sodium import *
 
 
@@ -71,7 +71,7 @@ class Crypto:
                 self.secretKey, remotePublicKey)
         except RuntimeError:
             raise RuntimeError(QObject().tr(
-                b"Unable to calculate session key."))
+                "Unable to calculate session key."))
 
     def sessionKeyDigest(self) -> str:
         h = crypto_generichash(self.sessionKey, crypto_generichash_BYTES_MIN)
@@ -100,5 +100,5 @@ class Crypto:
                 cipherText, None, nonce, self.sessionKey)
         except (TypeError, ValueError) as e:
             raise RuntimeError(QObject().tr(
-                b"Decryption failed.") + " Error: " + str(e))
+                "Decryption failed.") + " Error: " + str(e))
         return plainText

@@ -29,8 +29,8 @@
 # OF self SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 from typing import List, Optional
-from PyQt5.QtCore import Qt, QLocale
-from PyQt5.QtWidgets import QWidget, QDialog, QMessageBox, QApplication
+from PyQt6.QtCore import Qt, QLocale
+from PyQt6.QtWidgets import QWidget, QDialog, QMessageBox, QApplication
 from LANDrop.ui_filetransferdialog import Ui_FileTransferDialog
 from LANDrop.filetransfersession import FileTransferSession
 
@@ -44,12 +44,12 @@ class FileTransferDialog(QDialog):
         self.questionBox = QMessageBox(self)
 
         self.ui.setupUi(self)
-        self.setWindowFlag(Qt.WindowStaysOnTopHint)
+        self.setWindowFlag(Qt.WindowType.WindowStaysOnTopHint)
 
-        self.questionBox.setIcon(QMessageBox.Question)
+        self.questionBox.setIcon(QMessageBox.Icon.Question)
         self.questionBox.setWindowTitle(QApplication.applicationName())
-        self.questionBox.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
-        self.questionBox.setDefaultButton(QMessageBox.Yes)
+        self.questionBox.setStandardButtons(QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
+        self.questionBox.setDefaultButton(QMessageBox.StandardButton.Yes)
         self.questionBox.finished.connect(self.respond)
 
         self.session.setParent(self)
@@ -61,7 +61,7 @@ class FileTransferDialog(QDialog):
         self.session.start()
 
     def respond(self, result: int) -> None:
-        response = result == QMessageBox.Yes
+        response = result == QMessageBox.StandardButton.Yes
         self.session.respond(response)
         if not response:
             self.hide()
@@ -75,14 +75,14 @@ class FileTransferDialog(QDialog):
         self.errored = True
         if self.isVisible():
             QMessageBox.critical(self, QApplication.applicationName(), msg)
-        self.done(self.Rejected)
+        self.done(self.DialogCode.Rejected)
 
     def sessionFileMetadataReady(self, metadata: List[FileTransferSession.FileMetadata], totalSize: int,
                                  deviceName: str, sessionKeyDigest: str) -> None:
         self.show()
 
         totalSizeStr: str = self.locale().formattedDataSize(
-            totalSize, 2, QLocale.DataSizeTraditionalFormat)
+            totalSize, 2, QLocale.DataSizeFormat.DataSizeTraditionalFormat)
 
         if len(metadata) == 1:
             msg = self.tr("%1 would like to share a file \"%2\" of size %3.").replace("%1",

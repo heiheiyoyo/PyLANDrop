@@ -29,8 +29,8 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 from typing import Optional
-from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QDialog, QWidget, QApplication
+from PyQt6.QtCore import Qt
+from PyQt6.QtWidgets import QDialog, QWidget, QApplication
 from LANDrop.ui_aboutdialog import Ui_AboutDialog
 
 
@@ -39,7 +39,7 @@ class AboutDialog(QDialog):
         super().__init__(parent)
         self.ui = Ui_AboutDialog()
         self.ui.setupUi(self)
-        self.setWindowFlag(Qt.WindowStaysOnTopHint)
+        self.setWindowFlag(Qt.WindowType.WindowStaysOnTopHint)
         self.ui.aboutText.setHtml(
             self.ui.aboutText.toHtml(
             ).replace(

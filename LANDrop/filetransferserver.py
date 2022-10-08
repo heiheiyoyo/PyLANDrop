@@ -29,8 +29,8 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-from PyQt5.QtCore import QObject,Qt
-from PyQt5.QtNetwork import QTcpServer, QHostAddress
+from PyQt6.QtCore import QObject,Qt
+from PyQt6.QtNetwork import QTcpServer, QHostAddress
 from typing import Optional
 from LANDrop.settings import Settings
 from LANDrop.filetransferreceiver import FileTransferReceiver
@@ -45,7 +45,7 @@ class FileTransferServer(QObject):
 
     def start(self) -> None:
         port = Settings.serverPort()
-        if not self.server.listen(QHostAddress.Any, port):
+        if not self.server.listen(QHostAddress.SpecialAddress.Any, port):
             raise RuntimeError(self.tr("Unable to listen on port %1.").replace("%1", str(port)))
 
         self.server.newConnection.connect(self.serverNewConnection)
@@ -57,4 +57,4 @@ class FileTransferServer(QObject):
         while self.server.hasPendingConnections():
             receiver = FileTransferReceiver(None, self.server.nextPendingConnection())
             self._d = FileTransferDialog(None, receiver)
-            self._d.setAttribute(Qt.WA_DeleteOnClose)
+            self._d.setAttribute(Qt.WidgetAttribute.WA_DeleteOnClose)

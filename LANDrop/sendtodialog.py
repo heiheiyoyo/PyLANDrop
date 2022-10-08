@@ -37,10 +37,10 @@
 # include "sendtodialog.h"
 # include "ui_sendtodialog.h"
 
-from PyQt5.QtCore import Qt, QFile, QStringListModel, QTimer, QModelIndex
-from PyQt5.QtWidgets import QWidget, QDialog, QDialogButtonBox, QApplication, QMessageBox
-from PyQt5.QtGui import QCursor
-from PyQt5.QtNetwork import QHostAddress, QTcpSocket
+from PyQt6.QtCore import Qt, QFile, QStringListModel, QTimer, QModelIndex
+from PyQt6.QtWidgets import QWidget, QDialog, QDialogButtonBox, QApplication, QMessageBox
+from PyQt6.QtGui import QCursor
+from PyQt6.QtNetwork import QHostAddress, QTcpSocket
 from typing import List
 from LANDrop.ui_sendtodialog import Ui_SendToDialog
 from dataclasses import dataclass
@@ -66,14 +66,14 @@ class SendToDialog(QDialog):
         self.socketTimeoutTimer = QTimer()
 
         self.ui.setupUi(self)
-        self.setWindowFlag(Qt.WindowStaysOnTopHint)
+        self.setWindowFlag(Qt.WindowType.WindowStaysOnTopHint)
         self.ui.hostsListView.setModel(self.hostsStringListModel)
         self.ui.hostsListView.clicked.connect(self.hostsListViewClicked)
         self.ui.hostsListView.doubleClicked.connect(self.ui.buttonBox.accepted)
 
-        self.ui.buttonBox.button(QDialogButtonBox.Ok).setText(self.tr("Send"))
+        self.ui.buttonBox.button(QDialogButtonBox.StandardButton.Ok).setText(self.tr("Send"))
         self.ui.buttonBox.button(
-            QDialogButtonBox.Cancel).setText(self.tr("Cancel"))
+            QDialogButtonBox.StandardButton.Cancel).setText(self.tr("Cancel"))
 
         discoveryService.newHost.connect(self.newHost)
         self.discoveryTimer.timeout.connect(discoveryService.refresh)
@@ -110,8 +110,7 @@ class SendToDialog(QDialog):
     def hostsListViewClicked(self, index: QModelIndex) -> None:
 
         endpoint: SendToDialog.Endpoint = self.endpoints[index.row()]
-        isV4 = True  # FIXME: 可能出错
-        ipv4 = endpoint.addr.toIPv4Address()
+        ipv4,isV4 = endpoint.addr.toIPv4Address()
         addr = QHostAddress(ipv4).toString(
         ) if isV4 else endpoint.addr.toString()
         self.ui.addrLineEdit.setText(addr)
@@ -136,20 +135,20 @@ class SendToDialog(QDialog):
 
         self.socket = QTcpSocket(self)
         self.socket.connected.connect(self.socketConnected)
-        self.socket.error.connect(self.socketErrorOccurred)
+        self.socket.errorOccurred.connect(self.socketErrorOccurred)
 
         self.socket.connectToHost(addr, port)
-        self.ui.buttonBox.button(QDialogButtonBox.Ok).setEnabled(False)
-        self.setCursor(QCursor(Qt.WaitCursor))
+        self.ui.buttonBox.button(QDialogButtonBox.StandardButton.Ok).setEnabled(False)
+        self.setCursor(QCursor(Qt.CursorShape.WaitCursor))
         self.socketTimeoutTimer.start(5000)
 
     def socketConnected(self) -> None:
         self.socketTimeoutTimer.stop()
         sender = FileTransferSender(None, self.socket, self.files)
         self._d = FileTransferDialog(None, sender)
-        self._d.setAttribute(Qt.WA_DeleteOnClose)
+        self._d.setAttribute(Qt.WidgetAttribute.WA_DeleteOnClose)
         self._d.show()
-        self.done(self.Accepted)
+        self.done(self.DialogCode.Accepted)
 
     def socketErrorOccurred(self) -> None:
         self.socketTimeoutTimer.stop()
@@ -158,8 +157,8 @@ class SendToDialog(QDialog):
         self.socket.deleteLater()
         QMessageBox.critical(
             self, QApplication.applicationName(), self.socket.errorString())
-        self.ui.buttonBox.button(QDialogButtonBox.Ok).setEnabled(True)
-        self.setCursor(QCursor(Qt.ArrowCursor))
+        self.ui.buttonBox.button(QDialogButtonBox.StandardButton.Ok).setEnabled(True)
+        self.setCursor(QCursor(Qt.CursorShape.ArrowCursor))
 
     def socketTimeout(self) -> None:
         self.socket.disconnectFromHost()
@@ -167,5 +166,5 @@ class SendToDialog(QDialog):
         self.socket.deleteLater()
         QMessageBox.critical(
             self, QApplication.applicationName(), self.tr("Connection timed out"))
-        self.ui.buttonBox.button(QDialogButtonBox.Ok).setEnabled(True)
-        self.setCursor(QCursor(Qt.ArrowCursor))
+        self.ui.buttonBox.button(QDialogButtonBox.StandardButton.Ok).setEnabled(True)
+        self.setCursor(QCursor(Qt.CursorShape.ArrowCursor))

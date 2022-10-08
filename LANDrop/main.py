@@ -28,8 +28,8 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-from PyQt5.QtCore import QTranslator, QLocale
-from PyQt5.QtWidgets import QApplication, QSystemTrayIcon, QMessageBox
+from PyQt6.QtCore import QTranslator, QLocale
+from PyQt6.QtWidgets import QApplication, QSystemTrayIcon, QMessageBox
 import sys
 from LANDrop.trayicon import TrayIcon
 import LANDrop.resources
@@ -50,19 +50,19 @@ def main():
                        QLocale.system().name(), ":/locales", "", ".qm")
     a.installTranslator(appTranslator)
 
-    try:
-        if not QSystemTrayIcon.isSystemTrayAvailable():
-            raise RuntimeError(a.translate(
-                "Main", "Your system needs to support tray icon."))
+    # try:
+    if not QSystemTrayIcon.isSystemTrayAvailable():
+        raise RuntimeError(a.translate(
+            "Main", "Your system needs to support tray icon."))
 
-        t = TrayIcon()
-        t.show()
+    t = TrayIcon()
+    t.show()
 
-        sys.exit(a.exec())
+    sys.exit(a.exec())
 
-    except Exception as e:
-        QMessageBox.critical(None, QApplication.applicationName(), str(e))
-        sys.exit(1)
+    # except Exception as e:
+    #     QMessageBox.critical(None, QApplication.applicationName(), str(e))
+    #     sys.exit(1)
 
 
 if __name__ == "__main__":
